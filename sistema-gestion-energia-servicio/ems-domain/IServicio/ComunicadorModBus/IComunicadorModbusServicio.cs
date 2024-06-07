@@ -1,6 +1,6 @@
 ﻿namespace ems_domain.IServicio.ComunicadorModBus;
 
-public interface IExtraccionMedicionesServicio
+public interface IComunicadorModbusServicio
 {
     public object LecturaMedicion();
     public void EscrituraMedicion();
