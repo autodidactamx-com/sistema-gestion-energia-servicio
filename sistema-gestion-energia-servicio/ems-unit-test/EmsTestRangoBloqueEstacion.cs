@@ -22,7 +22,7 @@ public class EmsTestRangoBloqueEstacion
         return new RangoBloqueEstacionModelo()
         {
            Estacion = "Estacion Test",
-           Bloque = 1,
+           Id = 1,
            FechaHoraFinal = new DateTime(),
            FechaHoraInicio = new DateTime()
         };
