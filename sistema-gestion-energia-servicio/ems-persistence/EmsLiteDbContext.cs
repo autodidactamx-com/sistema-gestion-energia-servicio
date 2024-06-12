@@ -18,4 +18,8 @@ public class EmsLiteDbContext : DbContext
     public DbSet<CargaYDescargaBloque> CargaDescargaBloque { get; set; }
     public DbSet<RangoBloqueEstacion> RangoBloqueEstacion { get; set; }
     
+    /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlite("Data Source=ems-lite.db");
+    }*/
 }

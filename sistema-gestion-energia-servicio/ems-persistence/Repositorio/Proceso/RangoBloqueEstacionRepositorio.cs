@@ -16,7 +16,7 @@ public class RangoBloqueEstacionRepositorio : IRangoBloqueEstacionRepositorio
     {
         var rangoBloque = new RangoBloqueEstacion()
         {
-            bloque = modelo.Bloque,
+            id = modelo.Id,
             estacion = modelo.Estacion,
             hora_final = modelo.FechaHoraFinal,
             hora_inicial = modelo.FechaHoraInicio
@@ -28,7 +28,7 @@ public class RangoBloqueEstacionRepositorio : IRangoBloqueEstacionRepositorio
     public void ModificarPorId(int idBloque, RangoBloqueEstacionModelo modelo)
     {
         var rangoBloque = (from config in _context.RangoBloqueEstacion
-            where config.bloque == idBloque
+            where config.id == idBloque
             select config).SingleOrDefault();
         if (rangoBloque == null) return;
         rangoBloque.estacion = modelo.Estacion;
@@ -40,7 +40,7 @@ public class RangoBloqueEstacionRepositorio : IRangoBloqueEstacionRepositorio
     public void EliminarPorId(int idBloque)
     {
         var rangoBloque = (from c in _context.RangoBloqueEstacion
-            where c.bloque == idBloque
+            where c.id == idBloque
             select c).SingleOrDefault();
         if (rangoBloque == null) return;
         _context.RangoBloqueEstacion.Remove(rangoBloque);
@@ -50,10 +50,10 @@ public class RangoBloqueEstacionRepositorio : IRangoBloqueEstacionRepositorio
     public RangoBloqueEstacionModelo ObtenerPorBloque(int idBloque)
     {
         var configuracion = (from config in _context.RangoBloqueEstacion
-            where config.bloque == idBloque
+            where config.id == idBloque
             select new RangoBloqueEstacionModelo()
             {
-                Bloque = config.bloque,
+                Id = config.id,
                 FechaHoraInicio = config.hora_inicial,
                 FechaHoraFinal = config.hora_final,
                 Estacion = config.estacion
