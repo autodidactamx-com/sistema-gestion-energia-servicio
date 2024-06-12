@@ -27,26 +27,50 @@ public class ConfiguracionArranqueRepositorio : IConfiguracionArranqueRepositori
         };
         _context.ConfiguracionArranque.Add(configuracion);
         _context.SaveChanges();
+    }
+
+    public void ModificarPorId(int idConfiguracion, ConfiguracionArranqueModelo modelo)
+    {
+        var configuracion = (from config in _context.ConfiguracionArranque
+            where config.id == idConfiguracion
+            select config).SingleOrDefault();
+        if (configuracion == null) return;
+        configuracion.capacidad_bateria_segura = modelo.CapacidadBateriaSegura;
+        configuracion.capacidad_baterias = modelo.CapacidadBaterias;
+        configuracion.demanda_contratada = modelo.DemandaContratada;
+        configuracion.limite_demanda = modelo.LimiteDemanda;
+        configuracion.porcentaje_carga_segura = modelo.PorcentajeCargaSegura;
+        configuracion.porcentaje_respaldo_energía = modelo.PorcentajeRespaldoEnergia;
+        configuracion.potencia_baterias = modelo.PotenciaBaterias;
+        _context.SaveChanges();
+    }
+
+    public void EliminarPorId(int idConfiguracion)
+    {
+        var configuracion = (from c in _context.ConfiguracionArranque
+            where c.id == idConfiguracion
+            select c).SingleOrDefault();
+        if (configuracion == null) return;
+        _context.ConfiguracionArranque.Remove(configuracion);
+        _context.SaveChanges();
+    }
+
+    public ConfiguracionArranqueModelo ObtenerPorId(int idConfiguracion)
+    {
+        var configuracion = (from config in _context.ConfiguracionArranque
+            where config.id == idConfiguracion
+            select new ConfiguracionArranqueModelo
+            {
+                Id = config.id,
+                CapacidadBateriaSegura = config.capacidad_bateria_segura,
+                CapacidadBaterias = config.capacidad_baterias,
+                DemandaContratada = config.demanda_contratada,
+                LimiteDemanda = config.limite_demanda,
+                PorcentajeCargaSegura = config.porcentaje_carga_segura,
+                PorcentajeRespaldoEnergia = config.porcentaje_respaldo_energía,
+                PotenciaBaterias = config.potencia_baterias
+            }).SingleOrDefault();
         
-        var configuraciones = _context.ConfiguracionArranque.ToList();
-        foreach (var p in configuraciones)
-        {
-            Console.WriteLine($"ID: {p.id}");
-        }
-    }
-
-    public void ModificarPorId(int id, ConfiguracionArranqueModelo modelo)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void EliminarPorId(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void ObtenerPorId(int Id, ConfiguracionArranqueModelo modelo)
-    {
-        throw new NotImplementedException();
+        return configuracion;
     }
 }

@@ -31,18 +31,46 @@ public class ConfiguracionArranqueServicio : IConfiguracionArranqueServicio
         return respuesta;
     }
 
-    public void ModificarPorId(int id, ConfiguracionArranqueModelo modelo)
+    public RespuestaCrudModelo ModificarPorId(int idConfiguracion, ConfiguracionArranqueModelo modelo)
     {
-        throw new NotImplementedException();
+        var respuesta = new RespuestaCrudModelo();
+        try
+        {
+            _configuracionArranqueRepositorio.ModificarPorId(idConfiguracion: idConfiguracion, modelo: modelo);
+            respuesta.EstadoOperacion = true;
+            respuesta.MensajeOperacion = "Registro actualizado correctamente.";
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            respuesta.EstadoOperacion = false;
+            respuesta.MensajeOperacion = "Error durante la actualización: " + e.Message;
+        }
+        return respuesta;
     }
 
-    public void EliminarPorId(int id)
+    public RespuestaCrudModelo EliminarPorId(int idConfiguracion)
     {
-        throw new NotImplementedException();
+        var respuesta = new RespuestaCrudModelo();
+        try
+        {
+            _configuracionArranqueRepositorio.EliminarPorId(idConfiguracion: idConfiguracion);
+            respuesta.EstadoOperacion = true;
+            respuesta.MensajeOperacion = "Registro eliminado correctamente.";
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            respuesta.EstadoOperacion = false;
+            respuesta.MensajeOperacion = "Error durante la eliminación: " + e.Message;
+        }
+        return respuesta;
+        
     }
 
-    public ConfiguracionArranqueModelo ObtenerPorId(int Id)
+    public ConfiguracionArranqueModelo ObtenerPorId(int idConfiguracion)
     {
-        throw new NotImplementedException();
+        var resultadoConsulta = _configuracionArranqueRepositorio.ObtenerPorId(idConfiguracion: idConfiguracion);
+        return resultadoConsulta;
     }
 }
