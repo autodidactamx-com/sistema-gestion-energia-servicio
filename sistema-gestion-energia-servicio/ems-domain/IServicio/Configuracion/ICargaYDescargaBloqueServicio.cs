@@ -4,9 +4,9 @@ namespace ems_domain.IServicio.Configuracion;
 
 public interface ICargaYDescargaBloqueServicio
 {
-    public void Insertar(CargaYDescargaBloqueModelo modelo);
-    public void ModificarPorId(int id, CargaYDescargaBloqueModelo modelo);
-    public void EliminarPorId(int id);
-    public CargaYDescargaBloqueModelo ObtenerPorId(int Id);
+    public RespuestaCrudModelo Insertar(CargaYDescargaBloqueModelo modelo);
+    public RespuestaCrudModelo ModificarPorId(int idCarga, CargaYDescargaBloqueModelo modelo);
+    public RespuestaCrudModelo EliminarPorId(int idCarga);
+    public CargaYDescargaBloqueModelo ObtenerPorId(int idCarga);
     public List<CargaYDescargaBloqueModelo> ObtenerTodo();
 }

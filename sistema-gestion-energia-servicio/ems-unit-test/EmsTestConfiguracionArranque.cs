@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace ems_unit_test;
 
-public class EmsTest
+public class EmsTestConfiguracionArranque
 {
     private IServiceProvider _container;
     private IConfiguracionArranqueServicio _arranqueServicio;

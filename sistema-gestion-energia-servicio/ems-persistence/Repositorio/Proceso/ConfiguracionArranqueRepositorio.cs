@@ -69,7 +69,6 @@ public class ConfiguracionArranqueRepositorio : IConfiguracionArranqueRepositori
                 PorcentajeRespaldoEnergia = config.porcentaje_respaldo_energía,
                 PotenciaBaterias = config.potencia_baterias
             }).SingleOrDefault();
-        
         return configuracion;
     }
 }

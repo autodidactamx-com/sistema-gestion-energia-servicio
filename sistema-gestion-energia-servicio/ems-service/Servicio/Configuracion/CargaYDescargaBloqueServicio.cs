@@ -1,32 +1,93 @@
-﻿using ems_domain.IServicio.Configuracion;
+﻿using ems_domain.IRepositorio.Proceso;
+using ems_domain.IServicio.Configuracion;
 using ems_domain.Modelo.Proceso;
 
 namespace ems_service.Servicio.Configuracion;
 
 public class CargaYDescargaBloqueServicio : ICargaYDescargaBloqueServicio
 {
-    public void Insertar(CargaYDescargaBloqueModelo modelo)
+    private readonly ICargaYDescargaBloqueRepositorio _descargaBloqueRepositorio;
+
+    public CargaYDescargaBloqueServicio(ICargaYDescargaBloqueRepositorio descargaBloqueRepositorio)
     {
-        throw new NotImplementedException();
+        _descargaBloqueRepositorio = descargaBloqueRepositorio;
     }
 
-    public void ModificarPorId(int id, CargaYDescargaBloqueModelo modelo)
+    public RespuestaCrudModelo Insertar(CargaYDescargaBloqueModelo modelo)
     {
-        throw new NotImplementedException();
+        RespuestaCrudModelo respuesta;
+        try
+        {
+            _descargaBloqueRepositorio.Insertar(modelo: modelo);
+            respuesta = new RespuestaCrudModelo { 
+                EstadoOperacion = true, 
+                MensajeOperacion = "Registro insertado correctamente."
+            };
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            respuesta = new RespuestaCrudModelo { 
+                EstadoOperacion = false, 
+                MensajeOperacion = $"Error durante la inserción: {e.Message}"
+            };
+        }
+        return respuesta;
     }
 
-    public void EliminarPorId(int id)
+    public RespuestaCrudModelo ModificarPorId(int idCarga, CargaYDescargaBloqueModelo modelo)
     {
-        throw new NotImplementedException();
+        RespuestaCrudModelo respuesta;
+        try
+        {
+            _descargaBloqueRepositorio.ModificarPorId(idCarga: idCarga, modelo: modelo);
+            respuesta = new RespuestaCrudModelo { 
+                EstadoOperacion = true, 
+                MensajeOperacion = "Registro actualizado correctamente."
+            };
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            respuesta = new RespuestaCrudModelo { 
+                EstadoOperacion = false, 
+                MensajeOperacion = $"Error durante la actualización: {e.Message}"
+            };
+        }
+        return respuesta;
     }
 
-    public CargaYDescargaBloqueModelo ObtenerPorId(int Id)
+    public RespuestaCrudModelo EliminarPorId(int idCarga)
     {
-        throw new NotImplementedException();
+        RespuestaCrudModelo respuesta;
+        try
+        {
+            _descargaBloqueRepositorio.EliminarPorId(idCarga: idCarga);
+            respuesta = new RespuestaCrudModelo { 
+                EstadoOperacion = true, 
+                MensajeOperacion = "Registro eliminado correctamente."
+            };
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            respuesta = new RespuestaCrudModelo { 
+                EstadoOperacion = false, 
+                MensajeOperacion = $"Error durante la eliminación: {e.Message}"
+            };
+        }
+        return respuesta;
+    }
+
+    public CargaYDescargaBloqueModelo ObtenerPorId(int idCarga)
+    {
+        var resultadoConsulta = _descargaBloqueRepositorio.ObtenerPorId(idCarga: idCarga);
+        return resultadoConsulta;
     }
 
     public List<CargaYDescargaBloqueModelo> ObtenerTodo()
     {
-        throw new NotImplementedException();
+        var resultadoConsulta = _descargaBloqueRepositorio.ObtenerTodo();
+        return resultadoConsulta;
     }
 }
