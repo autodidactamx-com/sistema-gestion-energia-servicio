@@ -16,5 +16,6 @@ public class EmsLiteDbContext : DbContext
 
     public DbSet<ConfiguracionArranque> ConfiguracionArranque { get; set; }
     public DbSet<CargaYDescargaBloque> CargaDescargaBloque { get; set; }
+    public DbSet<RangoBloqueEstacion> RangoBloqueEstacion { get; set; }
     
 }
