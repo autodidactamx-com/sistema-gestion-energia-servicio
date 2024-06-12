@@ -9,7 +9,7 @@ using ems_persistencia;
 
 namespace ems_persistencia.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(EmsLiteDbContext))]
     [Migration("20240610181048_InitialCreate")]
     partial class InitialCreate
     {

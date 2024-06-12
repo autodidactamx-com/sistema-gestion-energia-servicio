@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "ExpEcdMemPrueUnit": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "remoteDebugEnabled": false
+    }
+  }
+}

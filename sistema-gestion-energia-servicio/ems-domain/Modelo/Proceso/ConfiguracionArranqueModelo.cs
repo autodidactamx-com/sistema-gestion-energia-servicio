@@ -6,8 +6,8 @@ public class ConfiguracionArranqueModelo
     public double DemandaContratada { get; set; }
     public double PorcentajeCargaSegura { get; set; }
     public double LimiteDemanda { get; set; }
-    public double PotenciaBaterías { get; set; }
-    public double CapacidadBaterías { get; set; }
-    public double PorcentajeRespaldoEnergía { get; set; }
-    public double CapacidadBateríaSegura { get; set; }
+    public double PotenciaBaterias { get; set; }
+    public double CapacidadBaterias { get; set; }
+    public double PorcentajeRespaldoEnergia { get; set; }
+    public double CapacidadBateriaSegura { get; set; }
 }

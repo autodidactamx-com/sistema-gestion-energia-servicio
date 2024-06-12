@@ -2,7 +2,7 @@
 
 namespace ems_service.Servicio.ComunicadorModBus;
 
-public class ExtraccionMedicionesServicio : IComunicadorModbusServicio
+public class ComunicadorModbusServicio : IComunicadorModbusServicio
 {
     public object LecturaMedicion()
     {
