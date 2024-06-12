@@ -1,6 +1,5 @@
 ﻿using ems_domain.IRepositorio.Proceso;
 using ems_domain.Modelo.Proceso;
-using Microsoft.EntityFrameworkCore;
 
 namespace ems_persistencia.Repositorio.Proceso;
 

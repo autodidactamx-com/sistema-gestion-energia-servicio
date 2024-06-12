@@ -6,19 +6,20 @@ namespace ems_unit_test;
 
 public class EmsTest
 {
-    public IServiceProvider _container;
+    private IServiceProvider _container;
+    private IConfiguracionArranqueServicio _arranqueServicio;
+
     
     [SetUp]
     public void Setup()
     {
         _container = new ConfiguracionServicios().Build();
+        _arranqueServicio = _container.GetService<IConfiguracionArranqueServicio>();
     }
-
-    [Test]
-    public void TestAddConfiguracionArranque()
+    
+    private ConfiguracionArranqueModelo CrearConfiguracionModelo()
     {
-        var arranqueServicio = _container.GetService<IConfiguracionArranqueServicio>();
-        var configuracionModelo = new ConfiguracionArranqueModelo()
+        return new ConfiguracionArranqueModelo()
         {
             DemandaContratada = 100,
             PorcentajeCargaSegura = 80,
@@ -28,49 +29,39 @@ public class EmsTest
             PorcentajeRespaldoEnergia = 70,
             CapacidadBateriaSegura = 90
         };
-        var resultadoOperacion = arranqueServicio.Insertar(modelo: configuracionModelo);
+    }
 
-        // Asegura que el resultado de la operación es verdadero
+    [Test]
+    public void TestAddConfiguracionArranque()
+    {
+        var configuracionModelo = CrearConfiguracionModelo();
+        var resultadoOperacion = _arranqueServicio.Insertar(modelo: configuracionModelo);
         Assert.True(resultadoOperacion.EstadoOperacion);
     }
 
     [Test]
     public void TestGetConfiguracionArranque()
     {
-        var arranqueServicio = _container.GetService<IConfiguracionArranqueServicio>();
         var idObtener = 1;
-        var actualModel = arranqueServicio.ObtenerPorId(idConfiguracion: idObtener);
+        var actualModel = _arranqueServicio.ObtenerPorId(idConfiguracion: idObtener);
         Assert.NotNull(actualModel); 
     }
     
     [Test]
     public void TestDeleteConfiguracionArranque()
     {
-        var arranqueServicio = _container.GetService<IConfiguracionArranqueServicio>();
         var idEliminar = 5;
-        var resultadoOperacion = arranqueServicio.EliminarPorId(idConfiguracion: idEliminar);
+        var resultadoOperacion = _arranqueServicio.EliminarPorId(idConfiguracion: idEliminar);
         Assert.True(resultadoOperacion.EstadoOperacion);
     }
     
     [Test]
     public void TestUpdateConfiguracionArranque()
     {
-        var arranqueServicio = _container.GetService<IConfiguracionArranqueServicio>();
-        var configuracionModelo = new ConfiguracionArranqueModelo()
-        {
-            DemandaContratada = 200,
-            PorcentajeCargaSegura = 160,
-            LimiteDemanda = 400,
-            PotenciaBaterias = 100,
-            CapacidadBaterias = 200,
-            PorcentajeRespaldoEnergia = 140,
-            CapacidadBateriaSegura = 180
-        };
+        var configuracionModelo = CrearConfiguracionModelo();
         var idModificar = 4;
-        var resultadoOperacion = arranqueServicio.ModificarPorId(idConfiguracion: idModificar, 
+        var resultadoOperacion = _arranqueServicio.ModificarPorId(idConfiguracion: idModificar, 
             modelo: configuracionModelo);
-
-        // Asegura que el resultado de la operación es verdadero
         Assert.True(resultadoOperacion.EstadoOperacion);
     }
 }

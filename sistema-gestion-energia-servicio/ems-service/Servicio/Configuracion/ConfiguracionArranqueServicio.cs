@@ -15,54 +15,66 @@ public class ConfiguracionArranqueServicio : IConfiguracionArranqueServicio
 
     public RespuestaCrudModelo Insertar(ConfiguracionArranqueModelo modelo)
     {
-        var respuesta = new RespuestaCrudModelo();
+        RespuestaCrudModelo respuesta;
         try
         {
             _configuracionArranqueRepositorio.Insertar(modelo: modelo);
-            respuesta.EstadoOperacion = true;
-            respuesta.MensajeOperacion = "Registro insertado correctamente.";
+            respuesta = new RespuestaCrudModelo { 
+                EstadoOperacion = true, 
+                MensajeOperacion = "Registro insertado correctamente."
+            };
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
-            respuesta.EstadoOperacion = false;
-            respuesta.MensajeOperacion = "Error durante la inserción: " + e.Message;
+            respuesta = new RespuestaCrudModelo { 
+                EstadoOperacion = false, 
+                MensajeOperacion = $"Error durante la inserción: {e.Message}"
+            };
         }
         return respuesta;
     }
 
     public RespuestaCrudModelo ModificarPorId(int idConfiguracion, ConfiguracionArranqueModelo modelo)
     {
-        var respuesta = new RespuestaCrudModelo();
+        RespuestaCrudModelo respuesta;
         try
         {
             _configuracionArranqueRepositorio.ModificarPorId(idConfiguracion: idConfiguracion, modelo: modelo);
-            respuesta.EstadoOperacion = true;
-            respuesta.MensajeOperacion = "Registro actualizado correctamente.";
+            respuesta = new RespuestaCrudModelo { 
+                EstadoOperacion = true, 
+                MensajeOperacion = "Registro actualizado correctamente."
+            };
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
-            respuesta.EstadoOperacion = false;
-            respuesta.MensajeOperacion = "Error durante la actualización: " + e.Message;
+            respuesta = new RespuestaCrudModelo { 
+                EstadoOperacion = false, 
+                MensajeOperacion = $"Error durante la actualización: {e.Message}"
+            };
         }
         return respuesta;
     }
 
     public RespuestaCrudModelo EliminarPorId(int idConfiguracion)
     {
-        var respuesta = new RespuestaCrudModelo();
+        RespuestaCrudModelo respuesta;
         try
         {
             _configuracionArranqueRepositorio.EliminarPorId(idConfiguracion: idConfiguracion);
-            respuesta.EstadoOperacion = true;
-            respuesta.MensajeOperacion = "Registro eliminado correctamente.";
+            respuesta = new RespuestaCrudModelo { 
+                EstadoOperacion = true, 
+                MensajeOperacion = "Registro eliminado correctamente."
+            };
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
-            respuesta.EstadoOperacion = false;
-            respuesta.MensajeOperacion = "Error durante la eliminación: " + e.Message;
+            respuesta = new RespuestaCrudModelo { 
+                EstadoOperacion = false, 
+                MensajeOperacion = $"Error durante la eliminación: {e.Message}"
+            };
         }
         return respuesta;
         
@@ -70,7 +82,8 @@ public class ConfiguracionArranqueServicio : IConfiguracionArranqueServicio
 
     public ConfiguracionArranqueModelo ObtenerPorId(int idConfiguracion)
     {
-        var resultadoConsulta = _configuracionArranqueRepositorio.ObtenerPorId(idConfiguracion: idConfiguracion);
+        var resultadoConsulta = _configuracionArranqueRepositorio.ObtenerPorId(
+            idConfiguracion: idConfiguracion);
         return resultadoConsulta;
     }
 }
