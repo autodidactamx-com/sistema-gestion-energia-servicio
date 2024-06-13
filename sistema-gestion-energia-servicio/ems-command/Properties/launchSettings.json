@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ems-command": {
+      "commandName": "Project",
+      "commandLineArgs": "conf-arranque -d 10"
+    }
+  }
+}
